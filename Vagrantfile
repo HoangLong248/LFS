@@ -6,14 +6,9 @@ Vagrant.configure("2") do |config|
 
   # Create the VM
   config.vm.define "LFS" do |subconfig|
-    subconfig.vm.box = "centos/7"
+    subconfig.vm.box = "bento/rockylinux-8"
     subconfig.vbguest.auto_update = true # Requires the vagrant-vbguest plugin
-    subconfig.vm.hostname = "LFS-Host"
-    # Networking - Uncomment below per your networking requirements
-    # For bridged network with VirtualBox, use 'VBoxManage list bridgedifs` to list
-    # available NICs suitable for bridging. use the "Name:" field for "bridge:"  
-    #subconfig.vm.network "public_network", ip: "172.16.1.150", bridge: "My Ethernet NIC name"
-    # subconfig.vm.network "public_network", ip: "172.16.1.150", bridge: "My Wireless NIC name"
+    subconfig.vm.hostname = "LFS"
     subconfig.vm.network :private_network, ip: "10.0.0.100"
   end
 
@@ -41,19 +36,9 @@ Vagrant.configure("2") do |config|
   end
 
 #   # Post-configuration bash script, runs as root after VM creation
-#   $post_config = <<-'SCRIPT'
-#   # Install EPEL
-#   yum -y install epel-release
-#   # Update Linux
-#   yum -y update
-#   # Install and enable Graphical Desktop
-#   # echo ""
-#   # echo "Installing Gnome Desktop"
-#   # echo "------------------------"
-#   # yum -y install '@^GNOME Desktop'
-#   # systemctl isolate graphical.target
-#   # systemctl set-default graphical.target
-#   SCRIPT
+  # $post_config = <<-'SCRIPT'
+  # apt-get install bash-completion
+  # SCRIPT
 
 #   # Run post_config script
 #   config.vm.provision "shell", inline: $post_config
